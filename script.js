@@ -52,6 +52,7 @@ for (i = 0; i < 3; i++) {
 
     var callback = (function (request) {
         return function(error, result){
+
             responses[request] = result;
             var l = [];
             for (K in responses){
