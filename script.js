@@ -95,7 +95,7 @@ function getData(url, callback) {
                     if(sum > 0)
                         console.log('Total population in '+ text +': ' + sum);
                     else
-                        console.log('Error, Error population data not found.');
+                        console.log('Error, population data not found.');
 
                     console.log('Total population in African cities: ' + p);
                 }
