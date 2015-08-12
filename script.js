@@ -50,6 +50,7 @@ function getData(url, callback) {
     var responses = {};
     var text = window.prompt('Please, enter the name of the city or country'),
         l= 0;
+        text = text.toLowerCase();
 
     for (i = 0; i < requests.length; i++) {
         var request = requests[i];
@@ -73,8 +74,8 @@ function getData(url, callback) {
                                 cc.push(responses['/cities'][i].name);
                             }
                         }
-                        if(responses['/cities'][i].country === text || responses['/cities'][i].name === text ){
-                            arCities.push(responses['/cities'][i].name);
+                        if(responses['/cities'][i].country.toLowerCase() === text || responses['/cities'][i].name.toLowerCase() === text ){
+                            arCities.push(responses['/cities'][i].name.toLowerCase());
                         }
                     }
 
@@ -86,14 +87,14 @@ function getData(url, callback) {
                         }
 
                         for (k = 0; k < arCities.length; k++) {
-                            if (responses['/populations'][i].name === arCities[k]) {
+                            if (responses['/populations'][i].name.toLowerCase() === arCities[k]) {
                                 sum += responses['/populations'][i].count;
                             }
                         }
                     }
 
                     if(sum > 0)
-                        console.log('Total population in '+ text +': ' + sum);
+                        console.log('Total population in '+ text.slice(0, 1).toUpperCase() + text.slice(1) +': ' + sum);
                     else
                         console.log('Error, population data not found.');
 
