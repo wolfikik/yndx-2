@@ -8,6 +8,24 @@
 <head>
     <meta charset="utf-8" />
     <title>Второе задание для ШРИ</title>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="css/pure-min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+<body>
+    <div class="wrapper">
+        <h1>Задание 2: работа с API</h1>
+        <form class="pure-form">
+            <fieldset>
+                <legend>Общая численность населения в африканских городах: <span class="num" id="africa"></span></legend>
+                <legend>Введите название страны или города</legend>
+                <input type="text" id="data" placeholder="Страна или город">
+                <button onclick="CSity.getText(); return false;" class="pure-button pure-button-primary">Получить данные</button>
+                <br />
+                <br />
+                <legend class="result-block" id="result-block">Общая численность населения: <span class="num" id="result"></span></legend>
+            </fieldset>
+        </form>
+    </div>
+</body>
 </html>
