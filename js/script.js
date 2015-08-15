@@ -19,7 +19,7 @@ function getData(url, callback) {
             {name: 'Quetzaltenango', country: 'Guatemala'},
             {name: 'Osaka', country: 'Japan'},
             {name: 'Subotica', country: 'Yugoslavia'},
-            {name: 'Zanzibar', country: 'Tanzania'},
+            {name: 'Zanzibar', country: 'Tanzania'}
         ],
         '/populations': [
             {count: 138000, name: 'Bamenda'},
@@ -65,7 +65,7 @@ CSity.getText = function(){
         document.getElementById('result').innerHTML = 'нет данных';
 
     document.getElementById('result-block').style.display = 'block';
-}
+};
 
 CSity.getQuery = function(){
     var k = 0;
