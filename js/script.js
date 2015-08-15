@@ -55,7 +55,7 @@ var CSity = {
 CSity.getText = function(){
     var count = 0;
     this.text = document.getElementById('data').value;
-    for(prop in this.data) {
+    for(var prop in this.data) {
         if(this.data[prop].country.toLowerCase() == this.text.toLowerCase()  || this.data[prop].sity.toLowerCase() == this.text.toLowerCase() )
             count += this.data[prop].count;
     }
@@ -69,51 +69,48 @@ CSity.getText = function(){
 
 CSity.getQuery = function(){
     var k = 0;
-    for (i = 0; i < this.requests.length; i++) {
-        var request = this.requests[i];
-        var callback = (function (request) {
-            return function(error, result){
-                for(prop in result) {
-                    if (!result.hasOwnProperty(prop)) continue;
-                    if (result[prop].hasOwnProperty('continent')){
-                        CSity.data[prop] = {};
-                        CSity.data[prop].continent = result[prop].continent;
-                        CSity.data[prop].country = result[prop].name;
-                    }
+    this.requests.forEach(function(request){
 
-                    if (result[prop].hasOwnProperty('country')){
-                        for(propCountry in CSity.data) {
-                            if (CSity.data[propCountry].country == result[prop].country){
-                                CSity.data[propCountry].sity = result[prop].name;
-                            }
-                        }
-                    }
+        getData(request, function(error, result){
+            for(var prop in result) {
+                if (!result.hasOwnProperty(prop)) continue;
+                if (result[prop].hasOwnProperty('continent')){
+                    CSity.data[prop] = {
+                        continent: result[prop].continent,
+                        country: result[prop].name
+                    };
+                }
 
-                    if (result[prop].hasOwnProperty('count')){
-                        for(propCount in CSity.data) {
-                            if (CSity.data[propCount].sity == result[prop].name){
-                                CSity.data[propCount].count = result[prop].count;
-                            }
+                if (result[prop].hasOwnProperty('country')){
+                    for(var propCountry in CSity.data) {
+                        if (CSity.data[propCountry].country == result[prop].country){
+                            CSity.data[propCountry].sity = result[prop].name;
                         }
                     }
                 }
-                k++;
-                if(k == 3)
-                    CSity.infoAfrica(CSity.data);
+
+                if (result[prop].hasOwnProperty('count')){
+                    for(var propCount in CSity.data) {
+                        if (CSity.data[propCount].sity == result[prop].name){
+                            CSity.data[propCount].count = result[prop].count;
+                        }
+                    }
+                }
             }
-        })(request);
-        getData(request, callback);
-    }
+
+            if(++k == 3) CSity.infoAfrica(CSity.data);
+        });
+    });
 };
 
 CSity.infoAfrica = function(data){
     var sum = 0;
-    for(propData in data) {
+    for(var propData in data) {
         if (data[propData].hasOwnProperty('continent') && data[propData].continent == 'Africa'){
             sum += data[propData].count;
         }
     }
     document.getElementById('africa').innerHTML = sum;
-}
+};
 
 CSity.getQuery();
